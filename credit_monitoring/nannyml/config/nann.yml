@@ -1,0 +1,38 @@
+input:
+  reference_data:
+    path: /data/reference_data.csv
+
+  analysis_data:
+    path: /data/analysis_data.csv
+
+  target_data:
+    path: /data/analysis_data_target.csv
+    join_column: identifier
+
+output:
+  database:
+    connection_string: postgresql://nannyml:we<3nannyml@metrics-store:5432/nannyml
+    model_name: default_classifier
+
+problem_type: classification_binary
+
+chunker:
+  chunk_period: W
+
+store:
+  file:
+    path: /store
+
+column_mapping:
+  features:
+    - person_age
+    - person_income
+    - person_emp_length
+    - loan_amnt
+    - loan_int_rate
+    - loan_percent_income
+    - cb_person_cred_hist_length
+  timestamp: timestamp
+  y_pred: y_pred
+  y_pred_proba: y_pred_proba
+  y_true: loan_status
